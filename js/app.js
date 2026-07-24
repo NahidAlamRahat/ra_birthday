@@ -7,28 +7,28 @@
 'use strict';
 
 // ── Config & Constants ──────────────────────────────────────
-const BIRTHDAY       = new Date(2026, 6, 25);   // July 25 2026
-const TOTAL_PHOTOS   = 23;
-const BIRTHDAY_MSG   =
+const BIRTHDAY = new Date(2026, 6, 25);   // July 25 2026
+const TOTAL_PHOTOS = 23;
+const BIRTHDAY_MSG =
   `Some people come into our lives and quietly become the most beautiful part of it.\n\n` +
   `You are one of those rare souls.\n\n` +
   `Thank you for every smile, every memory, every moment.\n\n` +
   `May this birthday bring endless happiness, love, peace, and everything your heart wishes for.\n\n` +
-  `Happy Birthday ❤️`;
+  `Happy Birthday Afrin ☘️❤️`;
 
-const FLOAT_EMOJIS   = ['❤️','🌸','✨','💕','🎈','💖','⭐','🌺','💗','🎀','✿','🍀','🌷','💞'];
-const CONF_COLORS    = ['#FF1493','#FF69B4','#FFD700','#8B5CF6','#E91E63','#FF8C00','#FFFFFF','#00E5FF'];
-const PARTICLE_COLS  = ['#FF69B4','#FFD700','#C084FC','#FF1493','#FFFFFF','#FFB3D1'];
+const FLOAT_EMOJIS = ['☘️', '🌸', '✨', '💕', '🎈', '💖', '⭐', '🌺', '💗', '🎀', '✿', '☘️', '🌷', '💞'];
+const CONF_COLORS = ['#FF1493', '#FF69B4', '#FFD700', '#8B5CF6', '#E91E63', '#FF8C00', '#FFFFFF', '#00E5FF'];
+const PARTICLE_COLS = ['#FF69B4', '#FFD700', '#C084FC', '#FF1493', '#FFFFFF', '#FFB3D1'];
 
 // ── Helpers ──────────────────────────────────────────────────
-const $   = id => document.getElementById(id);
-const pad = n  => String(n).padStart(2, '0');
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, '0');
 
 function isBirthdayToday() {
   const n = new Date();
   return n.getFullYear() === BIRTHDAY.getFullYear() &&
-         n.getMonth()    === BIRTHDAY.getMonth()    &&
-         n.getDate()     === BIRTHDAY.getDate();
+    n.getMonth() === BIRTHDAY.getMonth() &&
+    n.getDate() === BIRTHDAY.getDate();
 }
 
 /** Convert hex color to rgba string */
@@ -70,18 +70,18 @@ let pwCanvas, pwCtx, pwParticles = [], pwRaf;
 
 function initPassword() {
   pwCanvas = $('pw-canvas');
-  pwCtx    = pwCanvas.getContext('2d');
+  pwCtx = pwCanvas.getContext('2d');
   sizePwCanvas();
   window.addEventListener('resize', sizePwCanvas);
 
   spawnPwParticles();
   animPwParticles();
 
-  const input  = $('pw-input');
-  const btn    = $('pw-btn');
+  const input = $('pw-input');
+  const btn = $('pw-btn');
   const eyeBtn = $('pw-eye');
-  const wrap   = $('pw-input-wrap');
-  const errEl  = $('pw-error');
+  const wrap = $('pw-input-wrap');
+  const errEl = $('pw-error');
 
   // Auto-focus
   setTimeout(() => input.focus(), 500);
@@ -103,7 +103,7 @@ function initPassword() {
   eyeBtn.addEventListener('click', () => {
     const show = input.type === 'password';
     input.type = show ? 'text' : 'password';
-    $('eye-open')  .classList.toggle('hidden',  show);
+    $('eye-open').classList.toggle('hidden', show);
     $('eye-closed').classList.toggle('hidden', !show);
     input.focus();
   });
@@ -141,8 +141,8 @@ function doUnlock() {
   // After short pause, fade out password screen
   setTimeout(() => {
     const pwScreen = $('password-screen');
-    pwScreen.style.opacity         = '0';
-    pwScreen.style.pointerEvents   = 'none';
+    pwScreen.style.opacity = '0';
+    pwScreen.style.pointerEvents = 'none';
 
     setTimeout(() => {
       pwScreen.style.display = 'none';
@@ -154,7 +154,7 @@ function doUnlock() {
 
 function sizePwCanvas() {
   if (!pwCanvas) return;
-  pwCanvas.width  = window.innerWidth;
+  pwCanvas.width = window.innerWidth;
   pwCanvas.height = window.innerHeight;
 }
 
@@ -162,14 +162,14 @@ function spawnPwParticles() {
   pwParticles = [];
   for (let i = 0; i < 70; i++) {
     pwParticles.push({
-      x:   Math.random() * (pwCanvas.width  || window.innerWidth),
-      y:   Math.random() * (pwCanvas.height || window.innerHeight),
-      r:   Math.random() * 2.8 + 0.5,
-      vx:  (Math.random() - 0.5) * 0.38,
-      vy:  -(Math.random() * 0.45 + 0.08),
+      x: Math.random() * (pwCanvas.width || window.innerWidth),
+      y: Math.random() * (pwCanvas.height || window.innerHeight),
+      r: Math.random() * 2.8 + 0.5,
+      vx: (Math.random() - 0.5) * 0.38,
+      vy: -(Math.random() * 0.45 + 0.08),
       col: PARTICLE_COLS[Math.floor(Math.random() * PARTICLE_COLS.length)],
-      a:   Math.random() * 0.52 + 0.16,
-      ph:  Math.random() * Math.PI * 2,
+      a: Math.random() * 0.52 + 0.16,
+      ph: Math.random() * Math.PI * 2,
       phs: Math.random() * 0.017 + 0.005,
     });
   }
@@ -180,18 +180,18 @@ function animPwParticles() {
 
   for (const p of pwParticles) {
     // Move
-    p.x  += p.vx;
-    p.y  += p.vy;
+    p.x += p.vx;
+    p.y += p.vy;
     p.ph += p.phs;
 
     // Wrap around edges
     if (p.y < -12) p.y = pwCanvas.height + 12;
-    if (p.x < -12) p.x = pwCanvas.width  + 12;
-    if (p.x > pwCanvas.width  + 12) p.x = -12;
+    if (p.x < -12) p.x = pwCanvas.width + 12;
+    if (p.x > pwCanvas.width + 12) p.x = -12;
 
     const alpha = p.a * (0.55 + 0.45 * Math.sin(p.ph));
     drawGlow(pwCtx, p.x, p.y, p.r, p.col, alpha);
-    drawDot (pwCtx, p.x, p.y, p.r, p.col, alpha);
+    drawDot(pwCtx, p.x, p.y, p.r, p.col, alpha);
   }
 
   pwRaf = requestAnimationFrame(animPwParticles);
@@ -238,7 +238,7 @@ let mainCanvas, mainCtx, mainPtcls = [], mainRaf;
 
 function initMainCanvas() {
   mainCanvas = $('main-canvas');
-  mainCtx    = mainCanvas.getContext('2d');
+  mainCtx = mainCanvas.getContext('2d');
   sizeMainCanvas();
   window.addEventListener('resize', sizeMainCanvas);
   buildMainParticles();
@@ -247,7 +247,7 @@ function initMainCanvas() {
 
 function sizeMainCanvas() {
   if (!mainCanvas) return;
-  mainCanvas.width  = window.innerWidth;
+  mainCanvas.width = window.innerWidth;
   mainCanvas.height = window.innerHeight;
 }
 
@@ -255,14 +255,14 @@ function buildMainParticles() {
   mainPtcls = [];
   for (let i = 0; i < 50; i++) {
     mainPtcls.push({
-      x:   Math.random() * window.innerWidth,
-      y:   Math.random() * window.innerHeight,
-      r:   Math.random() * 2.2 + 0.4,
-      vx:  (Math.random() - 0.5) * 0.28,
-      vy:  (Math.random() - 0.5) * 0.28,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2.2 + 0.4,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
       col: PARTICLE_COLS[Math.floor(Math.random() * PARTICLE_COLS.length)],
-      a:   Math.random() * 0.38 + 0.1,
-      ph:  Math.random() * Math.PI * 2,
+      a: Math.random() * 0.38 + 0.1,
+      ph: Math.random() * Math.PI * 2,
       phs: Math.random() * 0.009 + 0.003,
     });
   }
@@ -272,17 +272,17 @@ function animMainCanvas() {
   mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
 
   for (const p of mainPtcls) {
-    p.x  += p.vx;
-    p.y  += p.vy;
+    p.x += p.vx;
+    p.y += p.vy;
     p.ph += p.phs;
 
     // Bounce off edges
-    if (p.x < 0 || p.x > mainCanvas.width)  p.vx *= -1;
+    if (p.x < 0 || p.x > mainCanvas.width) p.vx *= -1;
     if (p.y < 0 || p.y > mainCanvas.height) p.vy *= -1;
 
     const alpha = p.a * (0.5 + 0.5 * Math.sin(p.ph));
     drawGlow(mainCtx, p.x, p.y, p.r, p.col, alpha);
-    drawDot (mainCtx, p.x, p.y, p.r, p.col, alpha);
+    drawDot(mainCtx, p.x, p.y, p.r, p.col, alpha);
   }
 
   mainRaf = requestAnimationFrame(animMainCanvas);
@@ -299,12 +299,12 @@ function startFloatingElements() {
 }
 
 function spawnFloat() {
-  const el     = document.createElement('div');
+  const el = document.createElement('div');
   el.className = 'float-el';
   el.textContent = FLOAT_EMOJIS[Math.floor(Math.random() * FLOAT_EMOJIS.length)];
 
   const size = Math.random() * 19 + 13;       // 13–32 px
-  const dur  = Math.random() * 12 + 9;        // 9–21 s
+  const dur = Math.random() * 12 + 9;        // 9–21 s
 
   el.style.cssText = `
     left: ${Math.random() * 100}%;
@@ -342,8 +342,8 @@ function scheduleTyping() {
 }
 
 function typeMessage() {
-  const textEl  = $('typing-text');
-  const cursor  = $('blink-cursor');
+  const textEl = $('typing-text');
+  const cursor = $('blink-cursor');
   if (!textEl) return;
 
   textEl.textContent = '';
@@ -356,9 +356,9 @@ function typeMessage() {
       // Scroll message card smoothly as text grows
       const ch = BIRTHDAY_MSG[i - 1];
       let delay;
-      if (ch === '\n')                         delay = 280;
-      else if ('.!?,'.includes(ch))            delay = 100;
-      else                                     delay = 30 + Math.random() * 22;
+      if (ch === '\n') delay = 280;
+      else if ('.!?,'.includes(ch)) delay = 100;
+      else delay = 30 + Math.random() * 22;
 
       setTimeout(tick, delay);
     }
@@ -378,14 +378,14 @@ function buildGallery() {
   if (!grid) return;
 
   for (let i = 1; i <= TOTAL_PHOTOS; i++) {
-    const item     = document.createElement('div');
+    const item = document.createElement('div');
     item.className = 'gal-item';
     item.dataset.idx = i - 1;
 
-    const img    = document.createElement('img');
-    img.src      = `assets/images/${i}.jpg`;
-    img.alt      = `Memory ${i}`;
-    img.loading  = 'lazy';
+    const img = document.createElement('img');
+    img.src = `assets/images/${i}.jpg`;
+    img.alt = `Memory ${i}`;
+    img.loading = 'lazy';
     img.draggable = false;
 
     item.appendChild(img);
@@ -397,7 +397,7 @@ function buildGallery() {
 
   // Reveal gallery items as they enter the viewport (staggered)
   const items = grid.querySelectorAll('.gal-item');
-  const obs   = new IntersectionObserver((entries) => {
+  const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, idx) => {
       if (e.isIntersecting) {
         setTimeout(() => e.target.classList.add('show'), idx * 55);
@@ -414,34 +414,34 @@ function buildGallery() {
 //   GALLERY MODAL
 // ============================================================
 
-let curIdx   = 0;
+let curIdx = 0;
 let isZoomed = false;
-let tsX      = 0;   // touch start X
-let teX      = 0;   // touch end   X
+let tsX = 0;   // touch start X
+let teX = 0;   // touch end   X
 
 function initModalEvents() {
-  const modal   = $('gal-modal');
-  const bg      = $('gal-bg');
+  const modal = $('gal-modal');
+  const bg = $('gal-bg');
   const closeBtn = $('gal-close');
-  const prevBtn  = $('gal-prev');
-  const nextBtn  = $('gal-next');
-  const img      = $('gal-img');
+  const prevBtn = $('gal-prev');
+  const nextBtn = $('gal-next');
+  const img = $('gal-img');
   if (!modal) return;
 
   // Close
-  bg.addEventListener('click',       closeModal);
+  bg.addEventListener('click', closeModal);
   closeBtn.addEventListener('click', closeModal);
 
   // Navigate
   prevBtn.addEventListener('click', () => navModal(-1));
-  nextBtn.addEventListener('click', () => navModal( 1));
+  nextBtn.addEventListener('click', () => navModal(1));
 
   // Keyboard navigation
   document.addEventListener('keydown', e => {
     if (modal.classList.contains('hidden')) return;
-    if (e.key === 'ArrowLeft'  || e.key === 'a') navModal(-1);
-    if (e.key === 'ArrowRight' || e.key === 'd') navModal( 1);
-    if (e.key === 'Escape')                       closeModal();
+    if (e.key === 'ArrowLeft' || e.key === 'a') navModal(-1);
+    if (e.key === 'ArrowRight' || e.key === 'd') navModal(1);
+    if (e.key === 'Escape') closeModal();
   });
 
   // Touch swipe on modal image
@@ -481,7 +481,7 @@ function closeModal() {
 }
 
 function navModal(dir) {
-  curIdx   = (curIdx + dir + TOTAL_PHOTOS) % TOTAL_PHOTOS;
+  curIdx = (curIdx + dir + TOTAL_PHOTOS) % TOTAL_PHOTOS;
   isZoomed = false;
   const img = $('gal-img');
   img.style.transform = 'scale(1)';
@@ -492,13 +492,13 @@ function navModal(dir) {
   setTimeout(() => {
     setModalImg();
     img.style.transition = 'opacity 0.22s ease';
-    img.style.opacity    = '1';
+    img.style.opacity = '1';
     setTimeout(() => { img.style.transition = ''; }, 260);
   }, 140);
 }
 
 function setModalImg() {
-  $('gal-img')  .src         = `assets/images/${curIdx + 1}.jpg`;
+  $('gal-img').src = `assets/images/${curIdx + 1}.jpg`;
   $('gal-count').textContent = `${curIdx + 1} / ${TOTAL_PHOTOS}`;
 }
 
@@ -556,7 +556,7 @@ function buildCountdown() {
 }
 
 function tickCountdown() {
-  const now    = new Date();
+  const now = new Date();
   const target = new Date(BIRTHDAY);
   // If birthday passed, aim for next year
   if (now >= target) target.setFullYear(target.getFullYear() + 1);
@@ -565,9 +565,9 @@ function tickCountdown() {
   if (diff <= 0) return;
 
   const d = Math.floor(diff / 864e5);
-  const h = Math.floor((diff / 36e5)  % 24);
-  const m = Math.floor((diff / 6e4)   % 60);
-  const s = Math.floor((diff / 1000)  % 60);
+  const h = Math.floor((diff / 36e5) % 24);
+  const m = Math.floor((diff / 6e4) % 60);
+  const s = Math.floor((diff / 1000) % 60);
 
   const de = $('cd-d'), he = $('cd-h'), me = $('cd-m'), se = $('cd-s');
   if (de) de.textContent = pad(d);
@@ -584,10 +584,10 @@ function tickCountdown() {
 let cfvs, cfCtx, cfPtcls = [], cfRunning = false;
 
 function launchConfetti() {
-  cfvs          = $('confetti-canvas');
-  cfCtx         = cfvs.getContext('2d');
-  cfvs.width    = window.innerWidth;
-  cfvs.height   = window.innerHeight;
+  cfvs = $('confetti-canvas');
+  cfCtx = cfvs.getContext('2d');
+  cfvs.width = window.innerWidth;
+  cfvs.height = window.innerHeight;
 
   window.addEventListener('resize', () => {
     if (cfvs) { cfvs.width = window.innerWidth; cfvs.height = window.innerHeight; }
@@ -598,18 +598,18 @@ function launchConfetti() {
     setTimeout(() => {
       for (let i = 0; i < 80; i++) {
         cfPtcls.push({
-          x:    Math.random() * cfvs.width,
-          y:    -10 - Math.random() * 160,
-          vx:   (Math.random() - 0.5) * 4.8,
-          vy:   Math.random() * 3.8 + 1.6,
+          x: Math.random() * cfvs.width,
+          y: -10 - Math.random() * 160,
+          vx: (Math.random() - 0.5) * 4.8,
+          vy: Math.random() * 3.8 + 1.6,
           grav: 0.065 + Math.random() * 0.04,
           drag: 0.986,
-          col:  CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)],
-          w:    Math.random() * 9  + 4,
-          h:    Math.random() * 5  + 3,
-          rot:  Math.random() * 360,
+          col: CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)],
+          w: Math.random() * 9 + 4,
+          h: Math.random() * 5 + 3,
+          rot: Math.random() * 360,
           rotV: (Math.random() - 0.5) * 9.5,
-          wob:  Math.random() * Math.PI * 2,
+          wob: Math.random() * Math.PI * 2,
           wobS: Math.random() * 0.09 + 0.04,
           shape: Math.random() > 0.38 ? 'rect' : 'circle',
         });
@@ -627,17 +627,17 @@ function animConfetti() {
   cfPtcls = cfPtcls.filter(p => p.y < cfvs.height + 45);
 
   for (const p of cfPtcls) {
-    p.vy  += p.grav;
-    p.vx  *= p.drag;
-    p.x   += p.vx + Math.sin(p.wob) * 1.5;
-    p.y   += p.vy;
+    p.vy += p.grav;
+    p.vx *= p.drag;
+    p.x += p.vx + Math.sin(p.wob) * 1.5;
+    p.y += p.vy;
     p.rot += p.rotV;
     p.wob += p.wobS;
 
     cfCtx.save();
     cfCtx.translate(p.x, p.y);
     cfCtx.rotate((p.rot * Math.PI) / 180);
-    cfCtx.fillStyle   = p.col;
+    cfCtx.fillStyle = p.col;
     cfCtx.globalAlpha = Math.max(0, 1 - (p.y / cfvs.height) * 0.65);
 
     if (p.shape === 'rect') {
@@ -665,7 +665,7 @@ function animConfetti() {
 
 function initMusicPlayer() {
   const audio = $('bg-audio');
-  const btn   = $('music-btn');
+  const btn = $('music-btn');
   if (!audio || !btn) return;
 
   let playing = false;
