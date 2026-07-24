@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A magical birthday surprise made with love ❤️">
+  <title>Happy Birthday ❤️</title>
+
+  <!-- Google Fonts: Poppins, Dancing Script, Great Vibes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Great+Vibes&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     PASSWORD SCREEN
+     ============================================================ -->
+<div id="password-screen">
+  <canvas id="pw-canvas"></canvas>
+
+  <div class="pw-card" id="pw-card">
+
+    <!-- Lock Icon -->
+    <div class="lock-wrap">
+      <div class="lock-glow-ring"></div>
+      <div class="lock-icon" id="lock-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="58" viewBox="0 0 52 58">
+          <defs>
+            <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF69B4"/>
+              <stop offset="100%" stop-color="#8B1FA2"/>
+            </linearGradient>
+          </defs>
+          <!-- Shackle -->
+          <path id="lock-arch"
+            d="M11,26 L11,17 C11,9.3 17.8,3 26,3 C34.2,3 41,9.3 41,17 L41,26"
+            stroke="url(#lg1)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <!-- Body -->
+          <rect id="lock-body" x="4" y="23" width="44" height="32" rx="7" fill="url(#lg1)"/>
+          <!-- Keyhole -->
+          <circle cx="26" cy="36" r="4.2" fill="white" opacity="0.95"/>
+          <rect x="23.8" y="39.2" width="4.4" height="7.5" rx="2.2" fill="white" opacity="0.95"/>
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="pw-title">A Special Surprise Awaits ❤️</h1>
+    <p class="pw-subtitle">Enter the secret password to unlock.</p>
+
+    <!-- Input -->
+    <div class="pw-input-group">
+      <div class="pw-input-wrap" id="pw-input-wrap">
+        <input
+          type="password"
+          id="pw-input"
+          placeholder="Secret Password"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="30"
+        >
+        <button class="pw-eye" id="pw-eye" type="button" aria-label="Toggle password visibility">
+          <!-- Eye Open -->
+          <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <!-- Eye Closed -->
+          <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="hidden">
+            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8
+              a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4
+              c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19
+              m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+            <line x1="1" y1="1" x2="23" y2="23"/>
+          </svg>
+        </button>
+      </div>
+      <p class="pw-error hidden" id="pw-error">Wrong Password 💔</p>
+    </div>
+
+    <button class="pw-btn" id="pw-btn">Unlock ✨</button>
+  </div>
+</div><!-- /#password-screen -->
+
+
+<!-- ============================================================
+     MAIN SITE  (hidden until correct password)
+     ============================================================ -->
+<div id="main-site" class="hidden">
+
+  <!-- Background particle canvas -->
+  <canvas id="main-canvas"></canvas>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ── Music Player ─────────────────────────── -->
+  <div class="music-player" id="music-player">
+    <audio id="bg-audio" loop preload="none">
+      <source src="assets/music/birthday.mp3" type="audio/mpeg">
+    </audio>
+    <button class="music-btn" id="music-btn" title="Play Background Music">
+      <span class="music-note" id="music-note">🎵</span>
+      <div class="music-bars" id="music-bars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+  </div>
+
+  <!-- ── HERO ─────────────────────────────────── -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <div class="hero-cake">🎂</div>
+      <h1 class="hero-title">Happy Birthday</h1>
+      <h2 class="hero-sub">My Special Person</h2>
+      <div class="hero-divider">
+        <span class="div-heart">❤</span>
+        <div class="div-line"></div>
+        <span class="div-heart">❤</span>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="s-dot"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ── BIRTHDAY MESSAGE ──────────────────────── -->
+  <section id="message-section" class="section">
+    <div class="container">
+      <div class="sec-head appear">
+        <span class="sec-eyebrow">With All My Heart</span>
+        <h2 class="sec-title">A Birthday Wish</h2>
+        <div class="sec-line"><span></span></div>
+      </div>
+      <div class="msg-card glass appear-up">
+        <span class="big-quote">"</span>
+        <p id="typing-text" class="typing-text"></p><span
+          class="blink-cursor" id="blink-cursor">|</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMAGE GALLERY ─────────────────────────── -->
+  <section id="gallery-section" class="section">
+    <div class="container">
+      <div class="sec-head appear">
+        <span class="sec-eyebrow">Captured Moments</span>
+        <h2 class="sec-title">Our Beautiful Memories</h2>
+        <div class="sec-line"><span></span></div>
+      </div>
+      <!-- Gallery items inserted by JS -->
+      <div class="masonry-grid" id="masonry-grid"></div>
+    </div>
+  </section>
+
+  <!-- ── MEMORY TIMELINE ──────────────────────── -->
+  <section id="timeline-section" class="section">
+    <div class="container">
+      <div class="sec-head appear">
+        <span class="sec-eyebrow">Cherished Moments</span>
+        <h2 class="sec-title">Our Journey</h2>
+        <div class="sec-line"><span></span></div>
+      </div>
+
+      <div class="timeline" id="timeline">
+        <div class="tl-line"></div>
+
+        <!-- Item 1 – Left -->
+        <div class="tl-item tl-left appear-left">
+          <div class="tl-card glass">
+            <span class="tl-emoji">❤️</span>
+            <h3 class="tl-name">First Meet</h3>
+            <p class="tl-desc">The moment the world changed forever — a meeting that was written in the stars.</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <!-- Item 2 – Right -->
+        <div class="tl-item tl-right appear-right">
+          <div class="tl-empty"></div>
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <span class="tl-emoji">😊</span>
+            <h3 class="tl-name">First Laugh</h3>
+            <p class="tl-desc">That genuine, beautiful laugh that made every corner of the world feel lighter.</p>
+          </div>
+        </div>
+
+        <!-- Item 3 – Left -->
+        <div class="tl-item tl-left appear-left">
+          <div class="tl-card glass">
+            <span class="tl-emoji">📸</span>
+            <h3 class="tl-name">Best Memory</h3>
+            <p class="tl-desc">A memory so beautiful, time itself paused to let us live it fully.</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <!-- Item 4 – Right -->
+        <div class="tl-item tl-right appear-right">
+          <div class="tl-empty"></div>
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <span class="tl-emoji">🎉</span>
+            <h3 class="tl-name">Today's Celebration</h3>
+            <p class="tl-desc">Your special day — celebrated with every ounce of love in this heart.</p>
+          </div>
+        </div>
+
+      </div><!-- /.timeline -->
+    </div>
+  </section>
+
+  <!-- ── COUNTDOWN ─────────────────────────────── -->
+  <section id="countdown-section" class="section">
+    <div class="container">
+      <div id="countdown-box"></div>
+    </div>
+  </section>
+
+  <!-- ── FINAL MESSAGE ─────────────────────────── -->
+  <section id="final-section" class="section">
+    <div class="container">
+      <div class="final-card glass appear-up">
+        <div class="final-sparkles">✨ ✨ ✨</div>
+        <p class="final-text">
+          No matter where life takes us,<br>
+          I hope your smile never fades.<br><br>
+          You deserve every happiness<br>in this world.<br><br>
+          <strong class="final-wish">Happy Birthday ❤️</strong>
+        </p>
+        <div class="glow-heart">❤️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>Made with <span class="ftr-heart">❤️</span> especially for You</p>
+  </footer>
+
+</div><!-- /#main-site -->
+
+
+<!-- ============================================================
+     GALLERY FULLSCREEN MODAL
+     ============================================================ -->
+<div id="gal-modal" class="gal-modal hidden">
+  <div class="gal-bg" id="gal-bg"></div>
+  <button class="gal-close" id="gal-close">✕</button>
+  <button class="gal-arrow gal-prev" id="gal-prev">&#8249;</button>
+  <div class="gal-img-box" id="gal-img-box">
+    <img id="gal-img" src="" alt="Memory photo" draggable="false">
+  </div>
+  <button class="gal-arrow gal-next" id="gal-next">&#8250;</button>
+  <div class="gal-count" id="gal-count">1 / 23</div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
